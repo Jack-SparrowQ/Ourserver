@@ -1,5 +1,7 @@
 package service;
 
+import java.util.regex.Pattern;
+
 import dao.UserDAO;
 import model.User;
 
@@ -8,6 +10,9 @@ public class AuthService {
     
     //This uses the UserDAO class that handles direct queries to the database.
     private UserDAO userDAO = new UserDAO();
+
+    private final Pattern emailRegex = Pattern.compile("^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    private final Pattern usernameRegex = Pattern.compile("^[A-Za-z]\\w{5,29}$");
 
     //Here you manage the business logic to search for a user in the database.
     public boolean login(String username, String password) {
@@ -20,13 +25,26 @@ public class AuthService {
     //Here you manage the business logic to register a user.
     public boolean register(String username, String email, String password) {
 
-        if(username == null || password == null || email == null ||
-            username.isEmpty() || password.isEmpty() || email.isEmpty()) {
-                return false;
+        if(!usernameRegex.matcher(username).matches()) {
+            return false;
+        }
+
+        if(password.length() < 6) {
+            return false;
+        }
+
+        if(!emailRegex.matcher(email).matches()) {
+            return false;
+        }
+
+        if(userDAO.mailExists(email)) {
+            return false;
         }
 
         User user = new User(username, email, password);
         return userDAO.register(user);
     }
+
+
 
 }

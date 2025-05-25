@@ -59,4 +59,23 @@ public class UserDAO {
 
     }
 
+    //verify that the mail does not exist in the database
+    public boolean mailExists(String mail) {
+
+        String sql = "SELECT id FROM users WHERE email = ?";
+
+        try(Connection conn = DBConnection.getConnection();
+        PreparedStatement state = conn.prepareStatement(sql)) {
+
+            state.setString(1, mail);
+            ResultSet rs = state.executeQuery();
+            return rs.next();
+
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return true;
+        }
+
+    }
+
 }
