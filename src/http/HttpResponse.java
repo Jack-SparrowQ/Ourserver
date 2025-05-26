@@ -20,7 +20,7 @@ public class HttpResponse {
     public void sendJson(String json) throws IOException {
         String statusLine = "HTTP/1.1 " + status + " " + getStatusText(status) + "\r\n";
         String headers = "Content-Type: application/json\r\n" +
-                         "Content-Length: " + json.length() + "\r\n\r\n";
+                         "Content-Length: " + json.getBytes().length + "\r\n\r\n";
 
         out.write(statusLine);
         out.write(headers);

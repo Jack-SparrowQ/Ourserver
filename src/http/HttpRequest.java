@@ -20,6 +20,10 @@ public class HttpRequest {
         String requesLine = in.readLine();
         if(requesLine == null || requesLine.isEmpty()) return;
 
+        String[] parts = requesLine.split(" ");
+        method = parts[0];
+        path = parts[1];
+
         //Reading headers
         int contentLength = 0;
         String line;
@@ -30,9 +34,13 @@ public class HttpRequest {
         }
 
         //Reading body (weather there is)
-        char[] buffer = new char[contentLength];
-        in.read(buffer,0,contentLength);
-        body = new String(buffer);
+        if(contentLength>0) {
+            char[] buffer = new char[contentLength];
+            in.read(buffer,0,contentLength);
+            body = new String(buffer);
+        } else {
+            body = "";
+        }
 
     }
 
