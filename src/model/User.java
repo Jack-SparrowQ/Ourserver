@@ -13,6 +13,13 @@ public class User {
         setPassword(password);
     }
 
+    public User(int id, String username, String email, String password) {
+        setUsername(username);
+        setEmail(email);
+        setPassword(password);
+        setId(id);
+    }
+
     public User() {}
 
     public void setId(int id) {

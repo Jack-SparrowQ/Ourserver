@@ -33,6 +33,10 @@ public class Router {
                     response.setStatus(200);
                     response.sendJson("{\"info\":\"Usa POST para registrar un usuario.\"}");
                     break;
+                case PATH_LOGIN:
+                    response.setStatus(200);
+                    response.sendJson("{\"info\":\"This is the /login.\"}");
+                    break; 
                 default:
                     sendNotFound(response);
             }

@@ -2,6 +2,8 @@ package controller;
 import java.io.IOException;
 
 import org.json.JSONObject;
+
+import dao.UserDAO;
 import http.HttpRequest;
 import http.HttpResponse;
 import model.User;
@@ -35,21 +37,28 @@ public class AuthController {
         }
     }
 
+    //This method es el encargado de validar el login exitoso.
     public static void login(HttpRequest request, HttpResponse response) throws IOException {
         
         try {
             JSONObject body = new JSONObject(request.getBody());
 
-            String username = body.optString("usernmae");
+            String username = body.optString("username");
             String password = body.optString("password");
 
-            AuthService service = new AuthService();
-            boolean success = service.login(username, password);
+            User user = UserDAO.findUser(username,password);
 
-            if (success) {
+            if (user != null) {
+                JSONObject res = new JSONObject();
+                res.put("message", "Welcome");
+                res.put("userID", user.getId());
+                res.put("username", user.getUsername());
+
                 response.setStatus(200);
-                response.sendJson("{\"message\":\"Welcome\"}");
+                response.sendJson(res.toString());
             } else {
+                JSONObject error = new JSONObject();
+                error.put("error", "Credentials invalible");
                 response.setStatus(400);
                 response.sendJson("{\"error\":\"The user do not exist or credentials invalaible\"}");
             }
