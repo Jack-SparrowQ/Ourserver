@@ -2,10 +2,17 @@ package model;
 
 public class User {
     
+    //main data
     private int id;
     private String username;
     private String password;
     private String email;
+
+    //other data
+    private String imgePath;
+    private String bio;
+    private String contact;
+
 
     public User(String username, String email, String password) {
         setUsername(username);
