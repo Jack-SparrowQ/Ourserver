@@ -25,9 +25,12 @@ public class AuthController {
             if (success) {
                 response.setStatus(200);
                 response.sendJson("{\"message\":\"Usuario registrado correctamente\"}");
+                System.out.println("El que hizo la peticion se registro");
             } else {
                 response.setStatus(400);
                 response.sendJson("{\"error\":\"No se pudo registrar el usuario\"}");
+                                System.out.println("El que hizo la peticion no se registro");
+
             }
 
 
@@ -56,11 +59,13 @@ public class AuthController {
 
                 response.setStatus(200);
                 response.sendJson(res.toString());
+                System.out.println("Permitido adelante");
             } else {
                 JSONObject error = new JSONObject();
                 error.put("error", "Credentials invalible");
                 response.setStatus(400);
                 response.sendJson("{\"error\":\"The user do not exist or credentials invalaible\"}");
+                System.out.println("El user no paso el Login");
             }
 
         } catch(Exception e) {

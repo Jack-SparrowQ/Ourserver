@@ -16,14 +16,15 @@ public class PostDAO {
     public boolean createPost(Post post) {
 
         //SLQ instruction
-        String sql = "INSERT INTO posts (author_id, description, image) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO productos (title, description, price) VALUES (?, ?, ?)";
 
         try(Connection conn = DBConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, post.getAuthorId());
+            stmt.setString(1, post.getTittle());
+            //stmt.setInt(1, post.getAuthorId());
             stmt.setString(2, post.getDescription());
-            stmt.setBytes(3, post.getImage());
+            //stmt.setBytes(3, post.getImage());
+            stmt.setString(3, post.getPrice());
 
             return stmt.executeUpdate() > 0;
         }catch(SQLException e) {
