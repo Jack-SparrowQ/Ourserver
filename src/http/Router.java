@@ -30,20 +30,26 @@ public class Router {
         if (METHOD_GET.equals(method)) {
             switch (path) {
                 case PATH_ROOT:
-                     response.setStatus(200);
+                    response.setStatus(200);
                     response.sendJson("{\"message\":\"Server is ready\"}");
+                    System.out.println("Someone has used "+PATH_ROOT);
+
                     break;
                 case PATH_REGISTER:
                     response.setStatus(200);
                     response.sendJson("{\"info\":\"Usa POST para registrar un usuario.\"}");
+                    System.out.println("Someone has used "+PATH_REGISTER);
+
                     break;
                 case PATH_LOGIN:
                     response.setStatus(200);
                     response.sendJson("{\"info\":\"This is the /login.\"}");
+                    System.out.println("Someone has used "+PATH_LOGIN);
                     break; 
                 case PATH_REGISTER_POST:
                     response.setStatus(200);
                     response.sendJson("{\"info\":\"This is to upload post.\"}");
+                    System.out.println("Someone has used "+PATH_REGISTER_POST);
                     break;
                 default:
                     sendNotFound(response);

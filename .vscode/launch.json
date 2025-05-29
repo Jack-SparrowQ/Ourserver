@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CMDExecutor",
+            "request": "launch",
+            "mainClass": "utils.CMDExecutor",
+            "projectName": "Ourserver_87b16776"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
