@@ -14,7 +14,7 @@ public class HttpServer {
 
     public void start() {
         System.out.println("Server is running on port ["+port+"]");
-
+        
         try(ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
                 Socket socket = serverSocket.accept();

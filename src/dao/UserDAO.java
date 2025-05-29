@@ -12,9 +12,9 @@ import utils.DBConnection;
 public class UserDAO {
     
     //Method responsible for querying the existence of an entity within the database
-    public User findUser(String username, String password) {
+    public static User findUser(String username, String password) {
 
-        String sql = "SELECT * FROM users WHERE lastname = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
         try(Connection conn = DBConnection.getConnection()) {
             PreparedStatement state = conn.prepareStatement(sql);
@@ -24,10 +24,12 @@ public class UserDAO {
             ResultSet rs = state.executeQuery();
 
             if(rs.next()) {
-                User user = new User();
-                user.setUsername(username);
-
-                return user;
+                return new User(
+                    rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("email"),
+                    rs.getString("password")
+                );
             }
         }catch(SQLException e) {
             e.printStackTrace();

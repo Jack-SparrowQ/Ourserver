@@ -2,7 +2,9 @@ import http.HttpServer;
 
 public class Main {
     public static void main(String[] args) {
-        HttpServer server = new HttpServer(8080);
+        int port = 8080;
+
+        HttpServer server = new HttpServer(port);
         server.start();
     }
 }
