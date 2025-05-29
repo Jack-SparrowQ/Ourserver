@@ -30,7 +30,7 @@ public class Router {
         if (METHOD_GET.equals(method)) {
             switch (path) {
                 case PATH_ROOT:
-                     response.setStatus(200);
+                    response.setStatus(200);
                     response.sendJson("{\"message\":\"Server is ready\"}");
                     System.out.println("Someone has used "+PATH_ROOT);
 
